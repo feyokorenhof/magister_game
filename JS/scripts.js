@@ -12,6 +12,9 @@ window.onload = function(){
 }
 
 function bereken(){
+    sum = 0;
+    totaal.length = 0;
+    cijfers.length = 0;
         
     for(var i = 0; i < cijfers.length; i++){
         var reg = RegExp(/[^0-9]*/g)
@@ -23,6 +26,7 @@ function bereken(){
     for(var i = 0; i < totaal.length; i++){
         sum += totaal[i];       
     }
+    console.log(totaal);
  
     var av = sum / totaal.length;
     if(av >= 5.5){
@@ -31,13 +35,17 @@ function bereken(){
     else{
         textGemiddelde.style.color = 'red';
     }
-    textGemiddelde.textContent = av;   
+    textGemiddelde.textContent = Math.round(av * 100 + Number.EPSILON) / 100;  
 
 }
 
 addCijfer.addEventListener('click', () =>{
     var newCijfer = userInput.value;
-    cijfers.push(newCijfer);
+    var node = document.createElement("p");
+    var textnode = document.createTextNode(newCijfer);
+    node.className = 'cijfer';
+    node.appendChild(textnode);    
+    cijferdiv.appendChild(node);
     bereken();
     
 
